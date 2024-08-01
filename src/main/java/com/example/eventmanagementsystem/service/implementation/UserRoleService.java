@@ -68,7 +68,6 @@ public class UserRoleService implements IUserRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("getUsersWithRole completed");
         return future;
     }
 
@@ -106,7 +105,6 @@ public class UserRoleService implements IUserRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("assignRoleToUser completed");
         return future;
     }
 }

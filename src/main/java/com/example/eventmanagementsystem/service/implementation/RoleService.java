@@ -50,7 +50,6 @@ public class RoleService implements IRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("getRoles completed");
         return future;
     }
 
@@ -75,7 +74,6 @@ public class RoleService implements IRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("getRoleById completed");
         return future;
     }
 
@@ -100,7 +98,6 @@ public class RoleService implements IRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("addRole completed");
         return future;
     }
 
@@ -133,7 +130,6 @@ public class RoleService implements IRoleService {
             future.completeExceptionally(e);
         }
 
-        logger.info("deleteRole completed");
         return future;
     }
 }

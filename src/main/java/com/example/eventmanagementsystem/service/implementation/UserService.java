@@ -52,7 +52,6 @@ public class UserService implements IUserService {
             future.completeExceptionally(e);
         }
 
-        logger.info("getAllUsers completed");
         return future;
     }
 
@@ -77,7 +76,6 @@ public class UserService implements IUserService {
             future.completeExceptionally(e);
         }
 
-        logger.info("getUserById completed");
         return future;
     }
 
@@ -117,7 +115,6 @@ public class UserService implements IUserService {
             future.completeExceptionally(e);
         }
 
-        logger.info("updateUser completed");
         return future;
     }
 
@@ -149,7 +146,6 @@ public class UserService implements IUserService {
             future.completeExceptionally(e);
         }
 
-        logger.info("deleteUser completed");
         return future;
     }
 }

@@ -66,7 +66,6 @@ public class AuthenticationService implements IAuthenticationService {
             future.completeExceptionally(e);
         }
 
-        logger.info("signUp completed");
         return future;
     }
 
@@ -90,6 +89,7 @@ public class AuthenticationService implements IAuthenticationService {
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 String jwtToken = jwtService.generateToken(userDetails);
 
+                response.setMessage("User logged in successfully");
                 response.setToken(jwtToken);
                 response.setExpiresIn(jwtService.getExpirationTime());
                 future.complete(response);
@@ -105,7 +105,6 @@ public class AuthenticationService implements IAuthenticationService {
             future.completeExceptionally(e);
         }
 
-        logger.info("login completed");
         return future;
     }
 }
