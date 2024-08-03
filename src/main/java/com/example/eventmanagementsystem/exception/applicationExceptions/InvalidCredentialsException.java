@@ -1,6 +1,6 @@
 package com.example.eventmanagementsystem.exception.applicationExceptions;
 
-public class InvalidCredentialsException extends Exception{
+public class InvalidCredentialsException extends RuntimeException{
     public InvalidCredentialsException() {
         super();
     }

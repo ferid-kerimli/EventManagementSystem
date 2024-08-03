@@ -18,4 +18,5 @@ public class Event {
     private String name;
     private String description;
     private LocalDateTime dateTime;
+    private String username;
 }

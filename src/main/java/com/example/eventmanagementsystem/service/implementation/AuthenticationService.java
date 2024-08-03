@@ -81,30 +81,34 @@ public class AuthenticationService implements IAuthenticationService {
                 throw new UsernameNotFoundException("Username not found");
             }
 
-            try {
-                var authentication = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
-                );
-
-                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                String jwtToken = jwtService.generateToken(userDetails);
-
-                response.setMessage("User logged in successfully");
-                response.setToken(jwtToken);
-                response.setExpiresIn(jwtService.getExpirationTime());
-                future.complete(response);
-                logger.info("User logged in successfully");
-            }
-            catch (Exception e) {
-                throw new InvalidCredentialsException("Invalid username or password");
-            }
+            authenticateUser(input, response);
+            future.complete(response);
+            logger.info("User logged in successfully");
         }
         catch (Exception e) {
             response.setMessage("Error while login");
-            logger.info("login Error: {}", e.getMessage());
+            logger.error("login Error: {}", e.getMessage());
             future.completeExceptionally(e);
         }
 
         return future;
+    }
+
+    private void authenticateUser(UserLoginDto input, AuthenticationResponse response) {
+        try {
+            var authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(input.getUsername(), input.getPassword())
+            );
+
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String jwtToken = jwtService.generateToken(userDetails);
+
+            response.setMessage("User logged in successfully");
+            response.setToken(jwtToken);
+            response.setExpiresIn(jwtService.getExpirationTime());
+        }
+        catch (Exception e) {
+            throw new InvalidCredentialsException("Invalid username or password");
+        }
     }
 }
