@@ -32,6 +32,7 @@ public class UserService implements IUserService {
     @Override
     public CompletableFuture<ApiResponse<List<UserGetDto>>> getAllUsers() {
         logger.info("getAllUsers called");
+
         var future = new CompletableFuture<ApiResponse<List<UserGetDto>>>();
         var response = new ApiResponse<List<UserGetDto>>();
 
@@ -45,8 +46,7 @@ public class UserService implements IUserService {
             response.Success(mappedUsers, 200);
             future.complete(response);
             logger.info("getAllUsers completed successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("getAllUsers failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -69,8 +69,7 @@ public class UserService implements IUserService {
             response.Success(mappedUser, 200);
             future.complete(response);
             logger.info("getUserById completed successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("getUserById failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -102,14 +101,12 @@ public class UserService implements IUserService {
                 response.Success(mappedUpdatedUser, 204);
                 future.complete(response);
                 logger.info("updateUser completed successfully");
-            }
-            else {
+            } else {
                 response.Failure("User not found", 404);
                 future.complete(response);
                 logger.info("Update User failed - User not found");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("UpdateUser failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -139,8 +136,7 @@ public class UserService implements IUserService {
                 future.complete(response);
                 logger.info("Delete User failed - user not found");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("deleteUser failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);

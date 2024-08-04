@@ -43,8 +43,7 @@ public class RoleService implements IRoleService {
             response.Success(mappedRoles, 200);
             future.complete(response);
             logger.info("getAllRoles completed successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("getAllRoles failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -67,8 +66,7 @@ public class RoleService implements IRoleService {
             response.Success(mappedRole, 200);
             logger.info("getRoleById completed successfully");
             future.complete(response);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("getRoleById failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -91,8 +89,7 @@ public class RoleService implements IRoleService {
             response.Success(roleCreateDto, 204);
             future.complete(response);
             logger.info("createRole completed successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("createRole failed: {}", e.getMessage(), e);
             future.completeExceptionally(e);
@@ -105,6 +102,7 @@ public class RoleService implements IRoleService {
     @Override
     public CompletableFuture<ApiResponse<Boolean>> deleteRole(Long id) {
         logger.info("deleteRole called");
+
         var future = new CompletableFuture<ApiResponse<Boolean>>();
         var response = new ApiResponse<Boolean>();
 
@@ -115,19 +113,16 @@ public class RoleService implements IRoleService {
                 roleRepository.deleteById(id);
 
                 response.Success(true, 204);
-                future.complete(response);
                 logger.info("deleteRole completed successfully");
-            }
-            else {
+            } else {
                 response.Failure("Role not found", 500);
-                future.complete(response);
                 logger.info("Delete Role failed - Role not found");
             }
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             response.Failure(e.getMessage(), 500);
             logger.error("deleteRole failed: {}", e.getMessage(), e);
-            future.completeExceptionally(e);
+            throw new RuntimeException(e);
         }
 
         return future;
